@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>Periodic Table</title>
+		
+		<style>
+		    body {
+		        font-family: sans-serif;
+		    }
+		    
+		    #periodic-table {
+		        border-collapse: collapse;
+		    }
+		    
+		    #periodic-table td{
+		        padding: 0;
+		    }
+		
+		    .periodic-table-el-parent {
+		        position: relative;
+		        bottom: 100%;
+		        width: 11em;
+		        height: 11em;
+		        color: white;
+		        cursor: pointer;
+		        margin-right: 0.5em;
+		        margin-top: 0.5em;
+		    }
+		    
+		    .periodic-table-el {
+		        display: grid;
+		        grid-template-rows: 2.5em 1fr 2.5em;
+		        grid-template-columns: 2.5em 1fr 2.5em;
+                width: 10em;
+                height: 10em;
+                padding: 0.5em;
+		    }
+		    
+		    .periodic-table-el-name {
+		        grid-column-start: 1;
+		        grid-column-end: 4;
+		        grid-row: 1;
+		        font-size: 18px;
+		        font-weight: bold;
+		    }
+		    
+		    .periodic-table-el-desc {
+		        grid-column-start: 1;
+		        grid-column-end: 4;
+		        grid-row: 3;
+		        align-self: end;
+		    }
+		</style>
+	</head>
+	<body>
+	    <table id="periodic-table"></table>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>
+	    /* global $ */
+	
+	    var config = {
+            "elements": [{
+                "name": "Dynamics 365",
+                "desc": "CRM & ERP [Salesforce]",
+                "color": "red"
+            },
+            {
+                "name": "Mail",
+                "desc": "Outlook Email",
+                "color": "blue",
+                "row": "Outlook",
+                "col": "Communication"
+            },
+            {
+                "name": "Calendar",
+                "desc": "Outlook calendar",
+                "color": "blue",
+                "row": "Outlook",
+                "col": "Communication"
+            },
+            {
+                "name": "People",
+                "desc": "Outlook contact list",
+                "color": "blue",
+                "row": "Outlook",
+                "col": "Communication"
+            },
+            {
+                "name": "Tasks",
+                "desc": "Outlook tasks",
+                "color": "blue",
+                "row": "Outlook",
+                "col": "Project Management"
+            },
+            {
+                "name": "To-Do",
+                "desc": "To-do list for life & work [Wunderlist]",
+                "color" :"lightblue",
+                "col": "Project Management",
+            },
+            {
+                "name": "Planner",
+                "desc": "Everyday project management [Trello]",
+                "color" :"lightgreen",
+                "col": "Project Management",
+            },
+            {
+                "name": "Project Online",
+                "desc": "Premium project management",
+                "color" :"green",
+                "col": "Project Management",
+            },
+            {
+                "name": "Skype",
+                "desc": "Instant messaging and video chat",
+                "color": "lightblue",
+                "col": "Communication"
+            },
+            {
+                "name": "Teams",
+                "desc": "Group chat and video chat [Slack]",
+                "color": "purple",
+                "col": "Communication"
+            },
+            {
+                "name": "Yammer",
+                "desc": "Social network [Facebook]",
+                "color": "blue",
+                "col": "Communication"
+            },
+            {
+                "name": "SharePoint Online",
+                "desc": "Team file sharing & storage",
+                "color": "blue",
+                "row": "File Sharing and Collaboration",
+                "col": "Communication"
+            },
+            {
+                "name": "OneDrive",
+                "desc": "Personal file storage",
+                "color": "blue",
+                "row": "File Sharing and Collaboration",
+                "col": "Communication"
+            },
+            {
+                "name": "Delve",
+                "desc": "Employee profile & content discovery",
+                "color": "blue",
+                "row": "File Sharing and Collaboration",
+                "col": "Communication"
+            },
+            {
+                "name": "Team Foundation Services",
+                "desc": "Code source version control",
+                "color": "blue",
+                "row": "File Sharing and Collaboration",
+                "col": "Communication"
+            },],
+            "rows": [
+                {
+                    "name": "Outlook",
+                    "color": "yellow"
+                },
+                {
+                    "name": "File Sharing and Collaboration",
+                    "color": "green"
+                }
+            ],
+            "cols": [
+                {
+                    "name": "Communication",
+                    "color": "gray"
+                },
+                {
+                    "name": "Project Management",
+                    "color": "gray"
+                }
+            ]
+        };
+	    
+	    $(function() {
+	        //row and col definitions for ungrouped entries
+	        config.rows.push({
+	            "name": "",
+	            "color": "white"
+	        });
+	        
+	        config.cols.push({
+	            "name": "",
+	            "color": "white"
+	        });
+            var $periodicTable = $("#periodic-table").empty();
+            for(let rowIter = 0; rowIter < config.rows.length; ++rowIter) {
+                console.log(config.rows[rowIter].name);
+                var $tableRow = $("<tr>").attr("id", "periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-row");
+                for(let colIter = 0; colIter < config.cols.length; ++colIter){
+                    var $tableCell = $("<td>").attr("id", "periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).addClass("periodic-table-col");
+                    $tableRow.append($tableCell);
+                }
+                $periodicTable.append($tableRow);
+            }
+            
+            for(let elementIter = 0; elementIter < config.elements.length; ++elementIter){
+                let element = config.elements[elementIter];
+                if(!element.row){
+                    element.row = "";
+                }
+                if(!element.col){
+                    element.col = "";
+                }
+                
+                var $tableElement = $("<div>").addClass("periodic-table-el");
+                $tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
+                $tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
+                $("#periodic-table-row-" + element.row.replace(/ /g, "_"), $periodicTable).find("#periodic-table-col-" + element.col.replace(/ /g, "_")).append($("<div>").addClass("periodic-table-el-parent").css("background-color", element.color).append($tableElement));
+            }
+            /*
+            for(let rowIter = 0; rowIter < tableElements.length; ++rowIter){
+                let $tableRow = $("<tr>");
+                
+                let rowName = "No Row";
+                
+                for(let colIter = 0; colIter < tableElements[rowIter].length; ++colIter){
+                    let element = tableElements[rowIter][colIter];
+                    let $tableElement = $("<div>").addClass("periodic-table-el");
+                    $tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
+                    $tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
+                    $tableRow.append($("<td>").addClass("periodic-table-el-parent").css("background-color", element.color).append($tableElement));
+                    
+                    if(typeof element.row !== "undefined"){
+                        rowName = element.row;
+                    }
+                }
+                
+                let $rowName = $("<td>").addClass("periodic-table-row-name");
+                $rowName.text(config.rows[rowName].name);
+                $rowName.css("background-color", config.rows[rowName].color);
+                $tableRow.prepend($rowName);
+                
+                $periodicTable.append($tableRow);
+            }
+            */
+        });
+	</script>
+</html>
