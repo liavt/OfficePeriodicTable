@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
+	    <!-- Made by Liav Turkia -->
+	    
 		<meta charset="UTF-8">
+		
+		<meta content="width=device-width,initial-scale=1" name="viewport">
 		
 		<title>Periodic Table</title>
 		
+		<!--Microsoft usually uses the Segoe font, but thats propertiary and costs money so Open Sans looks similar enough -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+		
 		<style>
 		    body {
-		        font-family: sans-serif;
+		        font-family: "Open Sans", sans-serif;
 		    }
 		    
 		    #periodic-table {
@@ -17,6 +24,16 @@
 		    #periodic-table td{
 		        padding: 0;
 		    }
+		    
+		    .periodic-table-col-header, .periodic-table-row-header {
+		        text-align: center;
+		        font-weight: bold;
+		        font-size: 20px;
+		    }
+		    
+		    .periodic-table-col-flex{
+		        display: flex;
+		    }
 		
 		    .periodic-table-el-parent {
 		        position: relative;
@@ -25,8 +42,22 @@
 		        height: 11em;
 		        color: white;
 		        cursor: pointer;
-		        margin-right: 0.5em;
-		        margin-top: 0.5em;
+		        margin: 0.25em;
+		        opacity: 0;
+		        filter: opacity(100%);
+		        transition: opacity 2s, filter 0.5s;
+		    }
+		    
+		    #periodic-table.periodic-table-loaded .periodic-table-el-parent {
+		        opacity: 1;
+		    }
+		    
+		    #periodic-table.periodic-table-highlighting .periodic-table-el-parent:not(.periodic-table-highlighted) {
+		        filter: opacity(30%);
+		    }
+		    
+		    .periodic-table-highlighted .periodic-table-el-parent {
+		        filter: opacity(100%) !important;
 		    }
 		    
 		    .periodic-table-el {
@@ -52,6 +83,13 @@
 		        grid-row: 3;
 		        align-self: end;
 		    }
+		    
+		    .periodic-table-el-img {
+		        grid-column: 2;
+		        grid-row: 2;
+		        width: 100%;
+		        height: 100%;
+		    }
 		</style>
 	</head>
 	<body>
@@ -65,100 +103,108 @@
             "elements": [{
                 "name": "Dynamics 365",
                 "desc": "CRM & ERP [Salesforce]",
-                "color": "red"
+                "color": "#00204F",
+                "img": "https://is3-ssl.mzstatic.com/image/thumb/Purple128/v4/b2/0d/58/b20d585c-0d9d-7e73-6840-9734fbe761fa/mzl.vmejjkvf.png/246x0w.jpg",
             },
             {
                 "name": "Mail",
                 "desc": "Outlook Email",
-                "color": "blue",
+                "color": "#0072C5",
+                "img": "https://pbs.twimg.com/profile_images/876910193467998208/aL0gJ9_Y_400x400.jpg",
                 "row": "Outlook",
                 "col": "Communication"
             },
             {
                 "name": "Calendar",
                 "desc": "Outlook calendar",
-                "color": "blue",
+                "color": "#0072C5",
+                "img": "https://applets.imgix.net/https%3A%2F%2Fassets.ifttt.com%2Fimages%2Fchannels%2F554351061%2Ficons%2Fon_color_large.png%3Fversion%3D0?ixlib=rails-2.1.3&w=200&h=200&s=0ca72708ba8d8e8bca7dc45455d5a026",
                 "row": "Outlook",
                 "col": "Communication"
             },
             {
                 "name": "People",
                 "desc": "Outlook contact list",
-                "color": "blue",
+                "color": "#D24726",
+                "img": "http://mywindowshub.com/wp-content/uploads/2015/09/ppl.jpg",
                 "row": "Outlook",
                 "col": "Communication"
             },
             {
                 "name": "Tasks",
                 "desc": "Outlook tasks",
-                "color": "blue",
+                "color": "#0072C6",
+                "img": "https://az818438.vo.msecnd.net/officialicons/outlooktasks/icon_1.0.970.1155_5d656391-5128-4479-9916-08d7b52a55bf.png",
                 "row": "Outlook",
                 "col": "Project Management"
             },
             {
                 "name": "To-Do",
                 "desc": "To-do list for life & work [Wunderlist]",
-                "color" :"lightblue",
+                "color": "#0072C6",
+                "img": "https://wpoffice365.com/wp-content/uploads/2017/09/tasks.png",
                 "col": "Project Management",
             },
             {
                 "name": "Planner",
                 "desc": "Everyday project management [Trello]",
-                "color" :"lightgreen",
+                "color": "#2F752E",
+                "img": "https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/2015/09/Introducing-Office-365-Planner-1-green.png",
                 "col": "Project Management",
             },
             {
                 "name": "Project Online",
                 "desc": "Premium project management",
-                "color" :"green",
+                "color": "#2E7237",
+                "img": "http://www.faceofit.com/wp-content/uploads/2016/04/msp1.png",
                 "col": "Project Management",
             },
             {
                 "name": "Skype",
                 "desc": "Instant messaging and video chat",
-                "color": "lightblue",
+                "color": "#00AFF0",
+                "img": "https://s4w.cdn.skype.com/0-239-0/images/socialLogo.png",
                 "col": "Communication"
             },
             {
                 "name": "Teams",
                 "desc": "Group chat and video chat [Slack]",
-                "color": "purple",
+                "color": "#5558AF",
+                "img": "https://upload.wikimedia.org/wikipedia/en/8/8d/Microsoft_Teams_logo.png",
                 "col": "Communication"
             },
             {
                 "name": "Yammer",
                 "desc": "Social network [Facebook]",
-                "color": "blue",
+                "color": "#0070C9",
+                "img": "https://store-images.s-microsoft.com/image/apps.37113.9007199266246812.3852d2ad-f2c3-480f-94d4-05ea1fac5be6.2acf39c6-8073-48fb-a0e0-49e4e5c0be73?w=180&h=180&q=60",
                 "col": "Communication"
             },
             {
                 "name": "SharePoint Online",
                 "desc": "Team file sharing & storage",
-                "color": "blue",
+                "color": "#0072C7",
+                "img": "https://www.bremmar.com.au/assets/sharepoint-128.png",
                 "row": "File Sharing and Collaboration",
                 "col": "Communication"
             },
             {
                 "name": "OneDrive",
                 "desc": "Personal file storage",
-                "color": "blue",
+                "color": "#094AB2",
+                "img": "https://images-na.ssl-images-amazon.com/images/I/21y14N9Wi5L.png",
                 "row": "File Sharing and Collaboration",
                 "col": "Communication"
             },
             {
                 "name": "Delve",
                 "desc": "Employee profile & content discovery",
-                "color": "blue",
+                "color": "#19A4DE",
+                "img": "http://www.iosicongallery.com/img/1024/office-delve-for-office-365-2017-08-14.png",
                 "row": "File Sharing and Collaboration",
                 "col": "Communication"
             },
-            {
-                "name": "Team Foundation Services",
-                "desc": "Code source version control",
-                "color": "blue",
-                "row": "File Sharing and Collaboration",
-                "col": "Communication"
-            },],
+            ],
             "rows": [
                 {
                     "name": "Outlook",
@@ -172,11 +218,11 @@
             "cols": [
                 {
                     "name": "Communication",
-                    "color": "gray"
+                    "color": "yellow"
                 },
                 {
                     "name": "Project Management",
-                    "color": "gray"
+                    "color": "purple"
                 }
             ]
         };
@@ -192,16 +238,44 @@
 	            "name": "",
 	            "color": "white"
 	        });
+	        
             var $periodicTable = $("#periodic-table").empty();
             for(let rowIter = 0; rowIter < config.rows.length; ++rowIter) {
-                console.log(config.rows[rowIter].name);
-                var $tableRow = $("<tr>").attr("id", "periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-row");
+                let $tableRow = $("<tr>").addClass("periodic-table-row");
+                let $rowHeader = $("<td>").text(config.rows[rowIter].name);
+                $rowHeader.css("background-color", config.rows[rowIter].color).addClass("periodic-table-row-header");
+                $rowHeader.hover(function(){
+                    $periodicTable.addClass("periodic-table-highlighting");
+                    $(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
+                }, function(){
+                    $periodicTable.removeClass("periodic-table-highlighting");
+                    $(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
+                });
+                $tableRow.append($rowHeader);
                 for(let colIter = 0; colIter < config.cols.length; ++colIter){
-                    var $tableCell = $("<td>").attr("id", "periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).addClass("periodic-table-col");
+                    let $tableCell = $("<td>").addClass("periodic-table-col");
+                    $tableCell.append($("<div>").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).addClass("periodic-table-col-flex"));
                     $tableRow.append($tableCell);
                 }
                 $periodicTable.append($tableRow);
             }
+            
+            var $colHeaders = $("<tr>");
+            //add an empty cell to account for the row headers
+            $colHeaders.append($("<td>"));
+            for(let colIter = 0; colIter < config.cols.length; ++colIter){
+                var $colHeader = $("<td>").text(config.cols[colIter].name);
+                $colHeader.css("background-color", config.cols[colIter].color).addClass("periodic-table-col-header");
+                $colHeader.hover(function(){
+                    $periodicTable.addClass("periodic-table-highlighting");
+                    $(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
+                }, function(){
+                    $periodicTable.removeClass("periodic-table-highlighting");
+                    $(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
+                });
+                $colHeaders.append($colHeader);
+            }
+            $periodicTable.append($colHeaders);
             
             for(let elementIter = 0; elementIter < config.elements.length; ++elementIter){
                 let element = config.elements[elementIter];
@@ -212,37 +286,33 @@
                     element.col = "";
                 }
                 
-                var $tableElement = $("<div>").addClass("periodic-table-el");
+                let $tableElement = $("<div>").addClass("periodic-table-el");
                 $tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
                 $tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
-                $("#periodic-table-row-" + element.row.replace(/ /g, "_"), $periodicTable).find("#periodic-table-col-" + element.col.replace(/ /g, "_")).append($("<div>").addClass("periodic-table-el-parent").css("background-color", element.color).append($tableElement));
-            }
-            /*
-            for(let rowIter = 0; rowIter < tableElements.length; ++rowIter){
-                let $tableRow = $("<tr>");
-                
-                let rowName = "No Row";
-                
-                for(let colIter = 0; colIter < tableElements[rowIter].length; ++colIter){
-                    let element = tableElements[rowIter][colIter];
-                    let $tableElement = $("<div>").addClass("periodic-table-el");
-                    $tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
-                    $tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
-                    $tableRow.append($("<td>").addClass("periodic-table-el-parent").css("background-color", element.color).append($tableElement));
-                    
-                    if(typeof element.row !== "undefined"){
-                        rowName = element.row;
-                    }
+                if(element.img){
+                    $tableElement.append($("<img>").addClass("periodic-table-el-img").attr("src", element.img));
                 }
                 
-                let $rowName = $("<td>").addClass("periodic-table-row-name");
-                $rowName.text(config.rows[rowName].name);
-                $rowName.css("background-color", config.rows[rowName].color);
-                $tableRow.prepend($rowName);
-                
-                $periodicTable.append($tableRow);
+                let $tableElementParent = $("<div>");
+                $tableElementParent.addClass("periodic-table-el-parent");
+                $tableElementParent.css("background-color", element.color);
+                //add some variety when it loads in, each cell loads in at different times
+                $tableElementParent.css("transition", "opacity " + Math.random() * 4000 + "ms, filter 0.5s").append($tableElement);
+                $tableElementParent.hover(function(){
+                    $periodicTable.addClass("periodic-table-highlighting");
+                    $(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
+                }, function(){
+                    $periodicTable.removeClass("periodic-table-highlighting");
+                    $(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
+                });
+                $(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).append($tableElementParent);
             }
-            */
+            
+            //run the intro animation
+            setTimeout(function(){
+                $periodicTable.addClass("periodic-table-loaded");
+            }, 100);
+            
         });
 	</script>
 </html>
