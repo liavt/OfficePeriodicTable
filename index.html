@@ -134,7 +134,7 @@
 					"color": "#0072C7",
 					"img": "https://www.bremmar.com.au/assets/sharepoint-128.png",
 					"url": "https://products.office.com/en-us/sharepoint/sharepoint-online-collaboration-software",
-					"row": "File Sharing and Collaboration",
+					"row": "Collaboration",
 					"col": "Communication"
 				},
 				{
@@ -143,7 +143,7 @@
 					"color": "#094AB2",
 					"img": "https://images-na.ssl-images-amazon.com/images/I/21y14N9Wi5L.png",
 					"url": "https://onedrive.live.com/about/en-us/",
-					"row": "File Sharing and Collaboration",
+					"row": "Collaboration",
 					"col": "Communication"
 				},
 				{
@@ -152,18 +152,18 @@
 					"color": "#19A4DE",
 					"img": "http://www.iosicongallery.com/img/1024/office-delve-for-office-365-2017-08-14.png",
 					"url": "https://products.office.com/en-us/business/intelligent-search?tab=Discovery",
-					"row": "File Sharing and Collaboration",
+					"row": "Collaboration",
 					"col": "Communication"
 				},
 				],
 				"rows": [
 					{
-						"name": "File Sharing and Collaboration",
+						"name": "Collaboration",
 						"color": "green"
 					},
 					{
 						"name": "Outlook",
-						"color": "yellow"
+						"color": "darkorange"
 					}
 				],
 				"cols": [
@@ -202,15 +202,8 @@
 				text-align: center;
 				font-weight: bold;
 				font-size: 1em;
-				height: 11em;
-			}
-			
-			.periodic-table-row-header-line, .periodic-table-col-header-line {
-				display: block;
-				position: absolute;
-				width: 100%;
-				height: 0.5em;
-				margin: auto;
+				height: 3em;
+				color: white;
 			}
 			
 			.periodic-table-row-header {
@@ -218,23 +211,17 @@
 				/* need to also include the min-width or else it will resize to be smaller on lower resolutions */
 				min-width: 11em;
 				transform: rotate(270deg);
-			}
-			
-			.periodic-table-row-header-line{
-				top: 10.5em;
+				position: relative;
+				left: 3.75em;
+				line-height: 3em;
 			}
 			
 			.periodic-table-col-header {
 				/*relative position needed because the line uses absolute positioning to put itself at the top of the cell*/
 				position: relative;
-			}
-			
-			.periodic-table-col-header-line {
-				width: auto;/*setting it to auto because we want it to also have the padding on the left/right without using calc()...*/
-				/*https://stackoverflow.com/questions/2434602/css-setting-width-height-as-percentage-minus-pixels*/
-				bottom: 10.5em;
-				left: 0.25em;
-				right: 0.25em;
+				height: 3em;
+				margin: 0.25em;
+				line-height: 3em;
 			}
 			
 			.periodic-table-col-flex{
@@ -355,9 +342,9 @@
 				var $periodicTable = $("#periodic-table").empty();
 				for(let rowIter = 0; rowIter < config.rows.length; ++rowIter) {
 					let $tableRow = $("<tr>").addClass("periodic-table-row");
-					let $rowHeader = $("<td>").text(config.rows[rowIter].name);
-					$rowHeader.append($("<div>").addClass("periodic-table-row-header-line").css("background-color", config.rows[rowIter].color));
-					$rowHeader.addClass("periodic-table-row-header").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-cell");
+					let $rowHeader = $("<div>").text(config.rows[rowIter].name).css("background-color", config.rows[rowIter].color);
+					//$rowHeader.append($("<div>").addClass("periodic-table-row-header-line").css("background-color", config.rows[rowIter].color));
+					$rowHeader.addClass("periodic-table-row-header");
 					$rowHeader.hover(function(){
 						$periodicTable.addClass("periodic-table-highlighting");
 						$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
@@ -365,7 +352,7 @@
 						$periodicTable.removeClass("periodic-table-highlighting");
 						$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
 					});
-					$tableRow.append($rowHeader);
+					$tableRow.append($("<td>").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-cell").append($rowHeader));
 					for(let colIter = 0; colIter < config.cols.length; ++colIter){
 						let $tableCell = $("<td>").addClass("periodic-table-col");
 						$tableCell.append($("<div>").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).addClass("periodic-table-col-flex"));
@@ -378,11 +365,11 @@
 				//add an empty cell to account for the row headers
 				$colHeaders.append($("<td>"));
 				for(let colIter = 0; colIter < config.cols.length; ++colIter){
-					let $colHeader = $("<td>").text(config.cols[colIter].name);
+					let $colHeader = $("<div>").text(config.cols[colIter].name);
 					//prepending it here because the line needs to go above (so before in the html hiearchy)
-					$colHeader.prepend($("<div>").css("background-color", config.cols[colIter].color).addClass("periodic-table-col-header-line"));
-					$colHeader.addClass("periodic-table-col-header").addClass("periodic-table-cell");
-					$colHeader.addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"));
+					//$colHeader.prepend($("<div>").css("background-color", config.cols[colIter].color).addClass("periodic-table-col-header-line"));
+					$colHeader.addClass("periodic-table-col-header");
+					$colHeader.css("background-color", config.cols[colIter].color);
 					$colHeader.hover(function(){
 						$periodicTable.addClass("periodic-table-highlighting");
 						$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
@@ -390,7 +377,7 @@
 						$periodicTable.removeClass("periodic-table-highlighting");
 						$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
 					});
-					$colHeaders.append($colHeader);
+					$colHeaders.append($("<td>").addClass("periodic-table-cell").addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).append($colHeader));
 				}
 				$periodicTable.append($colHeaders);
 				
