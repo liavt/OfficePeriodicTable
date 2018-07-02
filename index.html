@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<!-- Made by Liav Turkia -->
-		
-		<meta charset="UTF-8">
-		
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		
-		<meta content="width=device-width,initial-scale=1" name="viewport">
-		
-		<title>Office Periodic Table</title>
-		
-		<script>
-			/**
-			Edit this JSON object to configure how the periodic table displays.
-			
-			"elements" is an array of objects. Each object can have the following properties:
-			name: Name of the cell
-			desc: Description of the cell
-			color: Color of the cell. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
-			img: (optional) Link to an image. The image is placed in the center of the cell and resized to be square.
-			url: (optional) Link to a page describing this cell. When you click on the cell, the user will be directed to the specified url
-			row: (optional) Name of the row this cell belongs to. If not specified, automatically added to a row with other ungrouped cells
-			col: (optional) Name of the column this cell belongs to. If not specified, automatically added to a column with other ungrouped cells
-			
-			
-			"rows" is an array of objects. Each object can have the following properties:
-			name: Name of the row. This is also the named used by the "row" property of a cell.
-			color: Color of the line rendered under the name of the row. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
-			
-			"cols" is an array of objects. Each object can have the following properties:
-			name: Name of the column. This is also the named used by the "col" property of a cell.
-			color: Color of the line rendered under the name of the column. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
-			
-			Ordering matters in the config files. Rows and columns are rendered in the order which you define them in the config, with ungrouped entries being put in the top-most row and right-most column.
-			Elements are rendered left-to-right in their specified group.
-			*/
-			var config = {
-				"elements": [{
+
+<head>
+	<!-- Made by Liav Turkia -->
+
+	<meta charset="UTF-8">
+
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<meta content="width=device-width,initial-scale=1" name="viewport">
+
+	<title>Office Periodic Table</title>
+
+	<script>
+		/**Edit this JSON object to configure how the periodic table displays.
+				"logo" is a link to a logo. It is displayed above the table and title centered horizontally
+				"title" is the title of the periodic table. Displayed in a large header font above the table itself and below the logo
+				
+				"elements" is an array of objects. Each object can have the following properties:
+				name: Name of the cell
+				desc: Description of the cell
+				color: Color of the cell. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
+				img: (optional) Link to an image. The image is placed in the center of the cell and resized to be square.
+				url: (optional) Link to a page describing this cell. When you click on the cell, the user will be directed to the specified url
+				row: (optional) Name of the row this cell belongs to. If not specified, automatically added to a row with other ungrouped cells
+				subrow: (optional) Name of the sub row this cell belongs to. If not specified, automatically added to a sub row with other ungrouped cells
+				col: (optional) Name of the column this cell belongs to. If not specified, automatically added to a column with other ungrouped cells
+				subcol: (optional) Name of the sub column this cell belongs to. If not specified, automatically added to a sub column with other ungrouped cells
+				
+				"rows" is an array of objects. Each object can have the following properties:
+				name: Name of the row. This is also the named used by the "row" property of a cell.
+				color: Color of the line rendered under the name of the row. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
+				subrows: (optional) array of row objects (contain name and color.) Subrows are grouped under the main row. Elements can have an additional subrow specified with their main row.
+				
+				"cols" is an array of objects. Each object can have the following properties:
+				name: Name of the column. This is also the named used by the "col" property of a cell.
+				color: Color of the line rendered under the name of the column. This can be any accepted HTML code like "red", a hexcode like "#032FAE", or valid css like "rgba(152, 250, 0, 0.5)"
+				subcols: (optional) array of col objects (contain name and color.) Subcols are grouped under the main col. Elements can have an additional subcol specified with their main col.
+				
+				Ordering matters in the config files. Rows and columns are rendered in the order which you define them in the config, with ungrouped entries being put in the top-most row and right-most column.
+				Elements are rendered left-to-right in their specified group.
+										*/
+		var config = {
+			"logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7I9IVWGG9MlCkOGvmIhdgrzhmrVfhHUz6k5-gDu-BGNz78ppSg",
+			"title": "Office 365 Periodic Table",
+			"elements": [{
 					"name": "Dynamics 365",
 					"desc": "CRM & ERP [Salesforce]",
 					"color": "#00204F",
@@ -70,7 +77,7 @@
 					"img": "http://mywindowshub.com/wp-content/uploads/2015/09/ppl.jpg",
 					"url": "https://office.live.com/start/People.aspx?ui=en%2DUS&rs=HN",
 					"row": "Outlook",
-					"col": "Communication"
+					"col": "Communication",
 				},
 				{
 					"name": "Tasks",
@@ -95,6 +102,7 @@
 					"img": "https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/2015/09/Introducing-Office-365-Planner-1-green.png",
 					"url": "https://tasks.office.com/",
 					"col": "Project Management",
+					"subcol": "Column 1"
 				},
 				{
 					"name": "Project Online",
@@ -103,6 +111,7 @@
 					"img": "http://www.faceofit.com/wp-content/uploads/2016/04/msp1.png",
 					"url": "https://products.office.com/en-us/project/project-online-premium",
 					"col": "Project Management",
+					"subcol": "Column 2"
 				},
 				{
 					"name": "Skype",
@@ -135,6 +144,7 @@
 					"img": "https://www.bremmar.com.au/assets/sharepoint-128.png",
 					"url": "https://products.office.com/en-us/sharepoint/sharepoint-online-collaboration-software",
 					"row": "Collaboration",
+					"subrow": "Row 1",
 					"col": "Communication"
 				},
 				{
@@ -144,6 +154,7 @@
 					"img": "https://images-na.ssl-images-amazon.com/images/I/21y14N9Wi5L.png",
 					"url": "https://onedrive.live.com/about/en-us/",
 					"row": "Collaboration",
+					"subrow": "Row 2",
 					"col": "Communication"
 				},
 				{
@@ -155,89 +166,119 @@
 					"row": "Collaboration",
 					"col": "Communication"
 				},
-				],
-				"rows": [
-					{
-						"name": "Collaboration",
-						"color": "green"
-					},
-					{
-						"name": "Outlook",
-						"color": "darkorange"
-					}
-				],
-				"cols": [
-					{
-						"name": "Communication",
-						"color": "red"
-					},
-					{
-						"name": "Project Management",
-						"color": "purple"
-					}
-				]
-			};
-		</script>
+			],
+			"rows": [{
+					"name": "Collaboration",
+					"color": "green",
+					"subrows": [{
+						"name": "Row 1",
+						"color": "lavender"
+					}, {
+						"name": "Row 2",
+						"color": "maroon"
+					}]
+				},
+				{
+					"name": "Outlook",
+					"color": "darkorange",
+				}
+			],
+			"cols": [{
+					"name": "Communication",
+					"color": "red"
+				},
+				{
+					"name": "Project Management",
+					"color": "purple",
+					"subcols": [{
+						"name": "Column 1",
+						"color": "cyan"
+					}, {
+						"name": "Column 2",
+						"color": "magenta"
+					}]
+				}
+			]
+		};
+	</script>
+
+
+	<!--Microsoft usually uses the Segoe font, but thats propertiary and costs money so Open Sans looks similar enough -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+	<style>
+		body {
+			font-family: "Open Sans", sans-serif;
+		}
+
+		#periodic-table {
+			table-layout: fixed;
+			border-collapse: collapse;
+			margin: auto;
+		}
+
+		#periodic-table .periodic-table-col {
+			padding: 0;
+		}
+
+		.periodic-table-logo {
+			display: block;
+			margin: auto;
+			width: 20em;
+		}
 		
-		
-		<!--Microsoft usually uses the Segoe font, but thats propertiary and costs money so Open Sans looks similar enough -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-		
-		<style>
-			body {
-				font-family: "Open Sans", sans-serif;
-			}
-			
-			#periodic-table {
-				table-layout: fixed;
-				border-collapse: collapse;
-				margin: auto;
-			}
-			
-			#periodic-table .periodic-table-col{
-				padding: 0;
-			}
-			
-			.periodic-table-col-header, .periodic-table-row-header {
-				text-align: center;
-				font-weight: bold;
-				font-size: 1em;
-				height: 3em;
-				color: white;
-			}
-			
-			.periodic-table-row-header {
-				width: 11em;
-				/* need to also include the min-width or else it will resize to be smaller on lower resolutions */
-				min-width: 11em;
-				transform: rotate(270deg);
-				position: relative;
-				left: 3.75em;
-				line-height: 3em;
-			}
-			
-			.periodic-table-col-header {
-				/*relative position needed because the line uses absolute positioning to put itself at the top of the cell*/
-				position: relative;
-				height: 3em;
-				margin: 0.25em;
-				line-height: 3em;
-			}
-			
-			.periodic-table-col-flex{
-				display: flex;
-			}
-		
-			.periodic-table-el-parent {
-				position: relative;
-				bottom: 100%;
-				width: 11em;
-				height: 11em;
-				color: white;
-				cursor: pointer;
-				margin: 0.25em;
-				text-decoration: none;
-				/* the reason there is both opacity and filter: opacity is as follows:
+		.periodic-table-title{
+			width: 100%;
+			text-align: center;
+			padding: 0.5em;
+		}
+
+		.periodic-table-col-header,
+		.periodic-table-row-header,
+		.periodic-table-subrow-header {
+			text-align: center;
+			font-weight: bold;
+			font-size: 1em;
+			height: 3em;
+			color: white;
+			position: relative;
+			line-height: 3em;
+		}
+
+		.periodic-table-row-header {
+			transform: rotate(270deg);
+			margin: auto;
+			margin-top: -1.5em;
+			position: absolute;
+		}
+
+		.periodic-table-subrow-header {
+			width: 11em;
+			/* need to also include the min-width or else it will resize to be smaller on lower resolutions */
+			min-width: 11em;
+			transform: rotate(90deg);
+			right: 3.75em;
+		}
+
+		.periodic-table-col-header {
+			height: 3em;
+			margin: 0.25em;
+		}
+
+		.periodic-table-col-flex {
+			display: flex;
+		}
+
+		.periodic-table-el-parent {
+			position: relative;
+			bottom: 100%;
+			width: 11em;
+			height: 11em;
+			color: white;
+			cursor: pointer;
+			margin: 0.25em;
+			text-decoration: none;
+			/* the reason there is both opacity and filter: opacity is as follows:
 				the opacity property is used to give the fade in when the page loads. it starts off at 0, and the js assigns a random
 				transition-duration property to each cell. then, it adds the .periodic-table-loaded class to trigger the transition to 
 				go to opacity 1, causing a fade in.
@@ -246,192 +287,289 @@
 				property for transition however bcause it has a custom transition duration added to it by the js. instead, it uses
 				the filter: opacity as it's transition property. in essence, its a way to create two speeds of opacity transitions
 				*/
-				opacity: 0;
-				filter: opacity(100%);
-			}
-			
-			#periodic-table.periodic-table-loaded .periodic-table-el-parent {
-				opacity: 1;
-			}
-			
-			.periodic-table-cell {
-				filter: opacity(100%);
-				/*
+			opacity: 0;
+			filter: opacity(100%);
+		}
+
+		#periodic-table.periodic-table-loaded .periodic-table-el-parent {
+			opacity: 1;
+		}
+
+		.periodic-table-cell {
+			filter: opacity(100%);
+			/*
 				this following line should be replaced in the js by "transition: opacity Xms, filter 0.5s" where X is a random integer
 				this line is kept in the CSS because the header cells still have a fade when you hover over them but dont have a
 				random duration assigned by the JS
 				*/
-				transition: opacity 2s, filter 0.5s;
-			}
-			
-			/* 
+			transition: opacity 2s, filter 0.5s;
+		}
+
+		/* 
 			when you hover over a cell or row, it adds the .periodic-table-highlighting class to the table and
 			.periodic-table-highlighted to every cell. any cell that doesnt have the .periodic-table-highlighted
 			class needs to "fade" away. needs to use the filter: opacity property instead of the expected opacity
 			property because the latter has a custom transition duration assigned to it by the js used in the
 			loading fade in animation.
 			*/
-			#periodic-table.periodic-table-highlighting .periodic-table-cell:not(.periodic-table-highlighted) {
-				filter: opacity(30%);
-			}
-			
-			.periodic-table-highlighted .periodic-table-cell {
-				/*
+
+		#periodic-table.periodic-table-highlighting .periodic-table-cell:not(.periodic-table-highlighted) {
+			filter: opacity(30%);
+		}
+
+		.periodic-table-highlighted .periodic-table-cell {
+			/*
 				the above selector (with the filter: opacity(30%)) has more precendence over this one because
 				its a lot more specific, so !important has to be used here.
 				*/
-				filter: opacity(100%) !important;
-			}
-			
-			.periodic-table-el {
-				display: grid;
-				grid-template-rows: 3em 4.5em 2.5em;
-				grid-template-columns: 2.75em 4.5em 2.75em;
-				width: 10em;
-				height: 10em;
-				padding: 0.5em;
-			}
-			
-			.periodic-table-el-name {
-				grid-column-start: 1;
-				grid-column-end: 4;
-				grid-row: 1;
-				font-size: 1.125em;
-				font-weight: bold;
-			}
-			
-			.periodic-table-el-desc {
-				grid-column-start: 1;
-				grid-column-end: 4;
-				grid-row: 3;
-				align-self: end;
-			}
-			
-			.periodic-table-el-img {
-				grid-column: 2;
-				grid-row: 2;
-				width: 100%;
-				height: 100%;
-			}
-		</style>
-	</head>
-	<body>
-		<table id="periodic-table"></table>
-		<noscript>
+			filter: opacity(100%) !important;
+		}
+
+		.periodic-table-el {
+			display: grid;
+			grid-template-rows: 3em 4.5em 2.5em;
+			grid-template-columns: 2.75em 4.5em 2.75em;
+			width: 10em;
+			height: 10em;
+			padding: 0.5em;
+		}
+
+		.periodic-table-el-name {
+			grid-column-start: 1;
+			grid-column-end: 4;
+			grid-row: 1;
+			font-size: 1.125em;
+			font-weight: bold;
+		}
+
+		.periodic-table-el-desc {
+			grid-column-start: 1;
+			grid-column-end: 4;
+			grid-row: 3;
+			align-self: end;
+		}
+
+		.periodic-table-el-img {
+			grid-column: 2;
+			grid-row: 2;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<table id="periodic-table"></table>
+	<noscript>
 			Javascript is required to render this page
 		</noscript>
-		
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script>
-			/* global $, config */
-			
-			$(function() {
-				"use strict";
-				
-				//row and col definitions for ungrouped entries
-				config.rows.unshift({
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>
+		/* global $, config */
+
+		$(function() {
+			"use strict";
+
+			//row and col definitions for ungrouped entries
+			config.rows.unshift({
+				"name": "",
+				"color": "white"
+			});
+
+			config.cols.push({
+				"name": "",
+				"color": "white"
+			});
+
+			$("body").prepend($("<h1>").text(config.title).addClass("periodic-table-title")).prepend($("<img>").attr("src", config.logo).addClass("periodic-table-logo"));
+
+			var $periodicTable = $("#periodic-table").empty();
+
+			var $subColHeaders = $("<tr>");
+			//add an empty cell to account for the row headers
+			$subColHeaders.append($("<td>"));
+			for (let colIter = 0; colIter < config.cols.length; ++colIter) {
+				if (!config.cols[colIter].subcols) {
+					config.cols[colIter].subcols = [];
+				}
+
+				config.cols[colIter].subcols.push({
 					"name": "",
 					"color": "white"
 				});
-				
-				config.cols.push({
-					"name": "",
-					"color": "white"
-				});
-				
-				var $periodicTable = $("#periodic-table").empty();
-				for(let rowIter = 0; rowIter < config.rows.length; ++rowIter) {
-					let $tableRow = $("<tr>").addClass("periodic-table-row");
-					let $rowHeader = $("<div>").text(config.rows[rowIter].name).css("background-color", config.rows[rowIter].color);
-					//$rowHeader.append($("<div>").addClass("periodic-table-row-header-line").css("background-color", config.rows[rowIter].color));
-					$rowHeader.addClass("periodic-table-row-header");
-					$rowHeader.hover(function(){
+
+				for (let subColIter = 0; subColIter < config.cols[colIter].subcols.length; ++subColIter) {
+					let $subColHeader = $("<div>").text(config.cols[colIter].subcols[subColIter].name);
+					$subColHeader.addClass("periodic-table-col-header");
+					$subColHeader.css("background-color", config.cols[colIter].subcols[subColIter].color);
+					let classNameFilter = ".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_") + ".periodic-table-subcol-" + config.cols[colIter].subcols[subColIter].name.replace(/ /g, "_");
+					$subColHeader.hover(function() {
 						$periodicTable.addClass("periodic-table-highlighting");
-						$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
-					}, function(){
+						$(classNameFilter, $periodicTable).addClass("periodic-table-highlighted");
+					}, function() {
 						$periodicTable.removeClass("periodic-table-highlighting");
-						$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
+						$(classNameFilter, $periodicTable).removeClass("periodic-table-highlighted");
 					});
-					$tableRow.append($("<td>").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-cell").append($rowHeader));
-					for(let colIter = 0; colIter < config.cols.length; ++colIter){
-						let $tableCell = $("<td>").addClass("periodic-table-col");
-						$tableCell.append($("<div>").addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).addClass("periodic-table-col-flex"));
-						$tableRow.append($tableCell);
+					$subColHeaders.append($("<td>").addClass("periodic-table-cell").addClass("periodic-table-subcol-" + config.cols[colIter].subcols[subColIter].name.replace(/ /g, "_")).append($subColHeader));
+				}
+			}
+			$periodicTable.append($subColHeaders);
+
+			for (let rowIter = 0; rowIter < config.rows.length; ++rowIter) {
+				if (!config.rows[rowIter].subrows) {
+					config.rows[rowIter].subrows = [];
+				}
+
+				config.rows[rowIter].subrows.unshift({
+					"name": "",
+					"color": "white"
+				});
+
+				for (let subRowIter = 0; subRowIter < config.rows[rowIter].subrows.length; ++subRowIter) {
+					let $tableRow = $("<tr>").addClass("periodic-table-row");
+
+					if (subRowIter === 0) {
+						let $rowHeader = $("<div>").text(config.rows[rowIter].name).css("background-color", config.rows[rowIter].color);
+						//since the row headers are rotated 270 degrees, the width and height are "swapped." the js has to set the width because it cant be equal to 100% of it's parent height
+						$rowHeader.css("width", (config.rows[rowIter].subrows.length * 11.25) + "em").css("min-width", (config.rows[rowIter].subrows.length * 11) + "em");
+						$rowHeader.css("margin-left", (-1 * ((config.rows[rowIter].subrows.length * 5.655) - 9.25)) + "em");
+						$rowHeader.addClass("periodic-table-row-header");
+						$rowHeader.hover(function() {
+							$periodicTable.addClass("periodic-table-highlighting");
+							$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
+						}, function() {
+							$periodicTable.removeClass("periodic-table-highlighting");
+							$(".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
+						});
+						$tableRow.append($("<td>").css("width", "11em").attr("rowspan", config.rows[rowIter].subrows.length).addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_")).addClass("periodic-table-cell").append($rowHeader));
 					}
+
+					for (let colIter = 0; colIter < config.cols.length; ++colIter) {
+						// let $tableCellParent = $("<td>").addClass("periodic-table-col");
+						// for (let subColIter = 0; subColIter < config.cols[colIter].subcols.length; ++subColIter) {
+						// 	for (let subRowIter = 0; subRowIter < config.rows[rowIter].subrows.length; ++subRowIter) {
+
+						// 		let $tableCell = $("<div>").addClass("periodic-table-col-flex");
+						// 		$tableCell.addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"));
+						// 		$tableCell.addClass("periodic-table-subrow-" + config.rows[rowIter].subrows[subRowIter].name.replace(/ /g, "_"));
+						// 		$tableCell.addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"));
+						// 		$tableCell.addClass("periodic-table-subcol-" + config.cols[colIter].subcols[subColIter].name.replace(/ /g, "_"));
+						// 		$tableCellParent.append($tableCell);
+						// 	}
+						// }
+						// $tableRow.append($tableCellParent);
+
+						for (let subColIter = 0; subColIter < config.cols[colIter].subcols.length; ++subColIter) {
+							console.log(config.cols[colIter]);
+							let $tableCellParent = $("<td>").addClass("periodic-table-col");
+							let $tableCell = $("<div>").addClass("periodic-table-col-flex");
+							$tableCell.addClass("periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_"));
+							$tableCell.addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"));
+							$tableCell.addClass("periodic-table-subcol-" + config.cols[colIter].subcols[subColIter].name.replace(/ /g, "_"));
+							$tableCell.addClass("periodic-table-subrow-" + config.rows[rowIter].subrows[subRowIter].name.replace(/ /g, "_"));
+							$tableCellParent.append($tableCell);
+							$tableRow.append($tableCellParent);
+						}
+					}
+
+					let $subRowHeader = $("<div>").text(config.rows[rowIter].subrows[subRowIter].name).css("background-color", config.rows[rowIter].subrows[subRowIter].color);
+					$subRowHeader.addClass("periodic-table-subrow-header");
+					let classNameFilter = ".periodic-table-row-" + config.rows[rowIter].name.replace(/ /g, "_") + ".periodic-table-subrow-" + config.rows[rowIter].subrows[subRowIter].name.replace(/ /g, "_");
+					$subRowHeader.hover(function() {
+						$periodicTable.addClass("periodic-table-highlighting");
+						$(classNameFilter, $periodicTable).addClass("periodic-table-highlighted");
+					}, function() {
+						$periodicTable.removeClass("periodic-table-highlighting");
+						$(classNameFilter, $periodicTable).removeClass("periodic-table-highlighted");
+					});
+					$tableRow.append($("<td>").addClass("periodic-table-subrow-" + config.rows[rowIter].subrows[subRowIter].name.replace(/ /g, "_")).addClass("periodic-table-cell").append($subRowHeader));
+
 					$periodicTable.append($tableRow);
 				}
-				
-				var $colHeaders = $("<tr>");
-				//add an empty cell to account for the row headers
-				$colHeaders.append($("<td>"));
-				for(let colIter = 0; colIter < config.cols.length; ++colIter){
-					let $colHeader = $("<div>").text(config.cols[colIter].name);
-					//prepending it here because the line needs to go above (so before in the html hiearchy)
-					//$colHeader.prepend($("<div>").css("background-color", config.cols[colIter].color).addClass("periodic-table-col-header-line"));
-					$colHeader.addClass("periodic-table-col-header");
-					$colHeader.css("background-color", config.cols[colIter].color);
-					$colHeader.hover(function(){
-						$periodicTable.addClass("periodic-table-highlighting");
-						$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
-					}, function(){
-						$periodicTable.removeClass("periodic-table-highlighting");
-						$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
-					});
-					$colHeaders.append($("<td>").addClass("periodic-table-cell").addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).append($colHeader));
-				}
-				$periodicTable.append($colHeaders);
-				
-				for(let elementIter = 0; elementIter < config.elements.length; ++elementIter){
-					let element = config.elements[elementIter];
-					if(!element.row){
-						element.row = "";
-					}
-					if(!element.col){
-						element.col = "";
-					}
-					
-					let $tableElement = $("<div>").addClass("periodic-table-el");
-					$tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
-					$tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
-					if(element.img){
-						$tableElement.append($("<img>").addClass("periodic-table-el-img").attr("src", element.img));
-					}
-					
-					let $tableElementParent = $("<a>");
-					$tableElementParent.addClass("periodic-table-el-parent").addClass("periodic-table-cell");
-					if(element.url){
-						$tableElementParent.attr("href", element.url).attr("target", "_blank").attr("rel", "noopener");
-					}
-					$tableElementParent.css("background-color", element.color);
-					//add some variety when it loads in, each cell loads in at different times
-					//read the comment in the css to understand what this line does and how the animation works
-					$tableElementParent.css("transition", "opacity " + Math.random() * 3000 + "ms, filter 0.5s").append($tableElement);
-					$tableElementParent.hover(function(){
-						$periodicTable.addClass("periodic-table-highlighting");
-						$(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
-					}, function(){
-						$periodicTable.removeClass("periodic-table-highlighting");
-						$(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
-					});
-					$(".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_"), $periodicTable).append($tableElementParent);
-				}
-			
-				//resize function that always shows 100% of the table at any time
-				$periodicTable.css("font-size", "16px");
-				$(window).resize(function(){
-					//add 100 px of padding to the right
-					var width = $periodicTable.width() + 100, windowWidth = $(window).width();
-					var currentFontSize = $periodicTable.css("font-size");
-					currentFontSize = currentFontSize.substr(0, currentFontSize.indexOf("px"));
-					$periodicTable.css("font-size", (currentFontSize * (windowWidth / width)) + "px");
+			}
+
+			var $colHeaders = $("<tr>");
+			//add an empty cell to account for the row headers
+			$colHeaders.append($("<td>"));
+			for (let colIter = 0; colIter < config.cols.length; ++colIter) {
+				let $colHeader = $("<div>").text(config.cols[colIter].name);
+				//prepending it here because the line needs to go above (so before in the html hiearchy)
+				//$colHeader.prepend($("<div>").css("background-color", config.cols[colIter].color).addClass("periodic-table-col-header-line"));
+				$colHeader.addClass("periodic-table-col-header");
+				$colHeader.css("background-color", config.cols[colIter].color);
+				$colHeader.hover(function() {
+					$periodicTable.addClass("periodic-table-highlighting");
+					$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).addClass("periodic-table-highlighted");
+				}, function() {
+					$periodicTable.removeClass("periodic-table-highlighting");
+					$(".periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_"), $periodicTable).removeClass("periodic-table-highlighted");
 				});
-				
-				//trigger the event for when it first loads
-				$(window).resize();
-				
-				//trigger the fade in transition
-				$periodicTable.addClass("periodic-table-loaded");
+				$colHeaders.append($("<td>").attr("colspan", config.cols[colIter].subcols.length).addClass("periodic-table-cell").addClass("periodic-table-col-" + config.cols[colIter].name.replace(/ /g, "_")).append($colHeader));
+			}
+			$periodicTable.append($colHeaders);
+
+			for (let elementIter = 0; elementIter < config.elements.length; ++elementIter) {
+				let element = config.elements[elementIter];
+				if (!element.row) {
+					element.row = "";
+				}
+				if (!element.col) {
+					element.col = "";
+				}
+				if (!element.subcol) {
+					element.subcol = "";
+				}
+				if (!element.subrow) {
+					element.subrow = "";
+				}
+
+				let elementClassName = ".periodic-table-row-" + element.row.replace(/ /g, "_") + ".periodic-table-subrow-" + element.subrow.replace(/ /g, "_") + ".periodic-table-col-" + element.col.replace(/ /g, "_") + ".periodic-table-subcol-" + element.subcol.replace(/ /g, "_");
+
+				let $tableElement = $("<div>").addClass("periodic-table-el");
+				$tableElement.append($("<div>").addClass("periodic-table-el-name").text(element.name));
+				$tableElement.append($("<div>").addClass("periodic-table-el-desc").text(element.desc));
+				if (element.img) {
+					$tableElement.append($("<img>").addClass("periodic-table-el-img").attr("src", element.img));
+				}
+
+				let $tableElementParent = $("<a>");
+				$tableElementParent.addClass("periodic-table-el-parent").addClass("periodic-table-cell");
+				if (element.url) {
+					$tableElementParent.attr("href", element.url).attr("target", "_blank").attr("rel", "noopener");
+				}
+				$tableElementParent.css("background-color", element.color);
+				//add some variety when it loads in, each cell loads in at different times
+				//read the comment in the css to understand what this line does and how the animation works
+				$tableElementParent.css("transition", "opacity " + Math.random() * 3000 + "ms, filter 0.5s").append($tableElement);
+				$tableElementParent.hover(function() {
+					$periodicTable.addClass("periodic-table-highlighting");
+					$(elementClassName, $periodicTable).addClass("periodic-table-highlighted");
+				}, function() {
+					$periodicTable.removeClass("periodic-table-highlighting");
+					$(elementClassName, $periodicTable).removeClass("periodic-table-highlighted");
+				});
+				$(elementClassName, $periodicTable).append($tableElementParent);
+			}
+
+			//resize function that always shows 100% of the table at any time
+			$periodicTable.css("font-size", "16px");
+			$(window).resize(function() {
+				//add 100 px of padding to the right
+				var width = $periodicTable.width() + 100,
+					windowWidth = $(window).width();
+				var currentFontSize = $periodicTable.css("font-size");
+				currentFontSize = currentFontSize.substr(0, currentFontSize.indexOf("px"));
+				$periodicTable.css("font-size", (currentFontSize * (windowWidth / width)) + "px");
 			});
-		</script>
-	</body>
+
+			//trigger the event for when it first loads
+			$(window).resize();
+
+			//trigger the fade in transition
+			$periodicTable.addClass("periodic-table-loaded");
+		});
+	</script>
+</body>
+
 </html>
